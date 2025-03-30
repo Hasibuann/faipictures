@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
-  const whatsappNumber = "6283161200344"; // Format tanpa "+"
+  const whatsappNumber = "6285692592661"; // Format tanpa "+"
 
   if (contactForm) {
     contactForm.addEventListener("submit", function (event) {
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         // Jika tidak terdeteksi, buka WhatsApp Web
         whatsappUrl = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(
-        whatsappMessage
+          whatsappMessage
         )}`;
       }
 
