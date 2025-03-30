@@ -27,9 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let whatsappUrl = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
 
       if (isMobile) {
-        // Jika di HP, buka aplikasi WhatsApp langsung
-        whatsappUrl = `whatsapp://send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
-      } else if (isDesktop) {
+  whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
+} else if (isDesktop) {
         // Coba buka WhatsApp Desktop terlebih dahulu
         const desktopUrl = `whatsapp://send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
 
