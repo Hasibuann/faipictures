@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const contactForm = document.getElementById("contactForm");
-  const whatsappNumber = "6283161200344"; // Format tanpa "+"
+  const whatsappNumber = "6283161200344"; // Nomor WhatsApp tanpa "+"
 
   if (contactForm) {
     contactForm.addEventListener("submit", function (event) {
@@ -12,35 +12,22 @@ document.addEventListener("DOMContentLoaded", function () {
       const subject = document.getElementById("subject")?.value.trim();
       const message = document.getElementById("message")?.value.trim();
 
+      // Validasi input
       if (!firstName || !lastName || !email || !subject || !message) {
         alert("Harap isi semua kolom sebelum mengirim pesan.");
         return;
       }
 
-      // Format pesan WhatsApp lebih natural
+      // Format pesan WhatsApp
       const whatsappMessage = `Halo Fai Picture! 👋\n\nSaya *${firstName} ${lastName}*, ingin bertanya tentang *${subject}*.\n\n${message}\n\nTerima kasih! Saya tunggu kabarnya. 😊`;
 
       // Deteksi perangkat
-      const isMobile = /iPhone|Android|iPad|iPod/i.test(navigator.userAgent);
-      const isDesktop = /Windows|Macintosh|Linux/i.test(navigator.userAgent);
+      const userAgent = navigator.userAgent;
+      const isMobile = /iPhone|Android|iPad|iPod/i.test(userAgent);
 
-      let whatsappUrl = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
-
-      if (isMobile) {
-  whatsappUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
-} else if (isDesktop) {
-        // Coba buka WhatsApp Desktop terlebih dahulu
-        const desktopUrl = `whatsapp://send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
-
-        window.open(desktopUrl, "_blank");
-
-        // Jika WhatsApp Desktop gagal dibuka, alihkan ke WhatsApp Web setelah 1 detik
-        setTimeout(() => {
-          window.open(whatsappUrl, "_blank");
-        }, 1000);
-        
-        return; // Mencegah eksekusi `window.open()` dua kali
-      }
+      let whatsappUrl = isMobile
+        ? `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`
+        : `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
 
       window.open(whatsappUrl, "_blank"); // Buka WhatsApp sesuai perangkat
     });
